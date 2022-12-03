@@ -11,3 +11,4 @@ C:\Users\User\Documents\GitHub\AdventOfCode2022\AdventOfCode2022\obj\Debug\netco
 C:\Users\User\Documents\GitHub\AdventOfCode2022\AdventOfCode2022\obj\Debug\netcoreapp3.1\AdventOfCode2022.pdb
 C:\Users\User\Documents\GitHub\AdventOfCode2022\AdventOfCode2022\obj\Debug\netcoreapp3.1\AdventOfCode2022.genruntimeconfig.cache
 C:\Users\User\Documents\GitHub\AdventOfCode2022\AdventOfCode2022\bin\Debug\netcoreapp3.1\Inputs\Day1Input.txt
+C:\Users\User\Documents\GitHub\AdventOfCode2022\AdventOfCode2022\obj\Debug\netcoreapp3.1\AdventOfCode2022.csprojAssemblyReference.cache
