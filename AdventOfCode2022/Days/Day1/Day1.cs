@@ -13,7 +13,6 @@ namespace AdventOfCode2022
             Console.WriteLine("Day 1 | Part 1");
             Console.WriteLine("----------");
             this.SolvePart1();
-            Utils.WaitForKeyPress();
             Console.WriteLine("");
 
             Console.WriteLine("Day 1 | Part 2");
@@ -49,7 +48,7 @@ namespace AdventOfCode2022
         static IEnumerable<int> GetCaloriesPerElf()
         {
             string root = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-            string path = Path.Combine(root, @"Inputs\Day1Input.txt");
+            string path = Path.Combine(root, @"Days\Day1\Day1Input.txt");
             string[] lines = File.ReadAllLines(path);
 
             return CountCaloriesPerElf(lines);
