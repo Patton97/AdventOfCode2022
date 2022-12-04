@@ -8,33 +8,22 @@ namespace AdventOfCode2022.Days.Day4
         /// <inheritdoc cref="IDay4.SolvePart1"/>
         public override void SolvePart1()
         {
-            string[] lines = this.ReadLines();
-            int fullyContainCounter = 0;
-            foreach (string line in lines)
-            {
-                Assignment[] assignments = line.Split(',')
-                    .Select(assignmentStr => assignmentStr.Split('-').Select(int.Parse).ToArray())
-                    .Select(assignmentBounds => new Assignment(assignmentBounds[0], assignmentBounds[1]))
-                    .ToArray();
-
-                if (this.CheckForFullyContain(assignments[0], assignments[1]))
-                {
-                    ++fullyContainCounter;
-                }
-            }
-            Console.WriteLine($"Number of pairs where one assignment fully contains the other: {fullyContainCounter}");
+            int numFullyContain = this.LoadAssignmentPairs()
+                .Where(this.IsOneFullyContainingOther)
+                .Count();
+            Console.WriteLine($"Number of pairs where one assignment fully contains the other: {numFullyContain}");
         }
 
-        bool CheckForFullyContain(Assignment assignment1, Assignment assignment2)
+        bool IsOneFullyContainingOther(AssignmentPair pair)
         {
-            if (assignment1.LowerBound <= assignment2.LowerBound
-                && assignment1.UpperBound >= assignment2.UpperBound)
+            if (pair.Assignment1.LowerBound <= pair.Assignment2.LowerBound
+                && pair.Assignment1.UpperBound >= pair.Assignment2.UpperBound)
             {
                 return true;
             }
 
-            if (assignment2.LowerBound <= assignment1.LowerBound
-                && assignment2.UpperBound >= assignment1.UpperBound)
+            if (pair.Assignment2.LowerBound <= pair.Assignment1.LowerBound
+                && pair.Assignment2.UpperBound >= pair.Assignment1.UpperBound)
             {
                 return true;
             }
@@ -44,8 +33,42 @@ namespace AdventOfCode2022.Days.Day4
         /// <inheritdoc cref="IDay4.SolvePart2"/>
         public override void SolvePart2()
         {
-            
+            int numOverlap = this.LoadAssignmentPairs()
+                .Where(this.HasOverlap)
+                .Count();
+            Console.WriteLine($"Number of pairs where one assignment fully contains the other: {numOverlap}");
+        }
+
+        bool HasOverlap(AssignmentPair pair)
+        {
+            if (pair.Assignment1.LowerBound <= pair.Assignment2.LowerBound
+                && pair.Assignment1.UpperBound >= pair.Assignment2.LowerBound)
+            {
+                return true;
+            }
+
+            if (pair.Assignment2.LowerBound <= pair.Assignment1.LowerBound
+                && pair.Assignment2.UpperBound >= pair.Assignment1.LowerBound)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        AssignmentPair[] LoadAssignmentPairs()
+        {
+            return this.ReadLines()
+                .Select(assignmentPairStr => assignmentPairStr.Split(','))
+                .Select(assignmentPair => assignmentPair
+                    .Select(assignmentStr => assignmentStr.Split('-').Select(int.Parse).ToArray())
+                    .Select(assignmentBounds => new Assignment(assignmentBounds[0], assignmentBounds[1]))
+                    .ToArray()
+                )
+                .Select(assignmentBoundsPair => new AssignmentPair(assignmentBoundsPair[0], assignmentBoundsPair[1]))
+                .ToArray();
         }
     }
     readonly record struct Assignment(int LowerBound, int UpperBound);
+    readonly record struct AssignmentPair(Assignment Assignment1, Assignment Assignment2);
 }

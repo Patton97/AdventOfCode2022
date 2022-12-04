@@ -1,4 +1,7 @@
-﻿namespace AdventOfCode2022.Days.Day4;
+﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Collections.Generic;
+
+namespace AdventOfCode2022.Days.Day4;
 
 internal interface IDay4
 {
@@ -64,6 +67,31 @@ internal interface IDay4
     /// In how many assignment pairs does one range fully contain the other?
     /// </summary>
     void SolvePart1();
+
+    /// <summary>
+    /// It seems like there is still quite a bit of duplicate work planned.
+    /// Instead, the Elves would like to know the number of pairs that overlap at all.<br/>
+    /// <br/>
+    /// In the above example, the first two pairs(2-4,6-8 and 2-3,4-5) don't overlap,
+    /// while the remaining four pairs (5-7,7-9, 2-8,3-7, 6-6,4-6, and 2-6,4-8) do overlap:<br/>
+    /// <list type="bullet">
+    ///     <item>
+    ///         5-7,7-9 overlaps in a single section, 7.
+    ///     </item>
+    ///     <item>
+    ///         2-8,3-7 overlaps all of the sections 3 through 7.
+    ///     </item>
+    ///     <item>
+    ///         6-6,4-6 overlaps in a single section, 6.
+    ///     </item>
+    ///     <item>
+    ///         2-6,4-8 overlaps in sections 4, 5, and 6.
+    ///     </item>
+    /// </list>
+    /// So, in this example, the number of overlapping assignment pairs is 4.<br/>
+    /// <br/>
+    /// In how many assignment pairs do the ranges overlap?
+    /// </summary>
     void SolvePart2();
 
 }
