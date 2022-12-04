@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Reflection;
 
 namespace AdventOfCode2022.Days.Day1;
 
@@ -18,8 +17,9 @@ class Day1 : Day, IDay1
         Console.WriteLine("Day 1 | Part 2");
         Console.WriteLine("----------");
         this.SolvePart2();
-        Utils.WaitForKeyPress();
         Console.WriteLine("");
+
+        Utils.WaitForKeyPress();
     }
 
     /// <inheritdoc/>
