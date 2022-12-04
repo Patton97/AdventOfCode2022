@@ -1,7 +1,6 @@
-﻿namespace AdventOfCode2022.Days
+﻿namespace AdventOfCode2022.Days;
+
+interface IDay
 {
-    interface IDay
-    {
-        void Solve();
-    }
+    void Solve();
 }

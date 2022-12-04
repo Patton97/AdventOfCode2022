@@ -1,12 +1,3 @@
-﻿using AdventOfCode2022.Days.Day1;
+﻿using AdventOfCode2022.Days.Day2;
 
-namespace AdventOfCode2022
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            new Day1().Solve();
-        }
-    }
-}
+new Day2().Solve();
