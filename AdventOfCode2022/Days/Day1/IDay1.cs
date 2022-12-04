@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AdventOfCode2022
+﻿namespace AdventOfCode2022.Days.Day1
 {
     interface IDay1 : IDay
     {
