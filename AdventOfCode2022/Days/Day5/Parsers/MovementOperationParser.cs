@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
+using AdventOfCode2022.Days.Day5.DTOs;
 
-namespace AdventOfCode2022.Days.Day5;
+namespace AdventOfCode2022.Days.Day5.Parsers;
 
 class MovementOperationParser
 {

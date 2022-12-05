@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace AdventOfCode2022.Days.Day5;
+namespace AdventOfCode2022.Days.Day5.Parsers;
 
 class CrateStackParser
 {

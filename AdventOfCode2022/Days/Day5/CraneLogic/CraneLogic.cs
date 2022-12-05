@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace AdventOfCode2022.Days.Day5;
+namespace AdventOfCode2022.Days.Day5.CraneLogic;
 
 abstract class CraneLogic
 {
