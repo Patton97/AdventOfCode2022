@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
+using AdventOfCode2022.Days.Day5.DTOs;
 
 namespace AdventOfCode2022.Days.Day5.CraneLogic;
 
-abstract class CraneLogic
+abstract class CraneLogicBase
 {
     internal abstract void PerformMovementOperation(ref Stack<Crate>[] stacks, MovementOperation movementOperation);
 

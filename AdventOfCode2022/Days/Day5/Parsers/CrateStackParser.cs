@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using AdventOfCode2022.Days.Day5.DTOs;
 
 namespace AdventOfCode2022.Days.Day5.Parsers;
 

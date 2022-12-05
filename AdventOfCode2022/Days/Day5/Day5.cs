@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using AdventOfCode2022.Days.Day5.CraneLogic;
 using AdventOfCode2022.Days.Day5.DTOs;
+using AdventOfCode2022.Days.Day5.Parsers;
 
 namespace AdventOfCode2022.Days.Day5;
 
@@ -18,7 +20,7 @@ internal class Day5 : Day, IDay5
         this.RunCraneSimulation(new CraneLogicPart2());
     }
 
-    void RunCraneSimulation(CraneLogic craneLogic)
+    void RunCraneSimulation(CraneLogicBase craneLogic)
     {
         var inputParser = new Day5InputParser();
         (Stack<Crate>[] stacks, MovementOperation[] movementOperations) = inputParser.Parse(this.ReadLines());

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using AdventOfCode2022.Days.Day5.DTOs;
 
-namespace AdventOfCode2022.Days.Day5.CraneLogic.CraneLogic;
+namespace AdventOfCode2022.Days.Day5.CraneLogic;
 
-class CraneLogicPart1 : CraneLogic
+class CraneLogicPart1 : CraneLogicBase
 {
     internal override void PerformMovementOperation(ref Stack<Crate>[] stacks, MovementOperation movementOperation)
     {
