@@ -32,6 +32,18 @@ internal class Day6 : Day, IDay6
     /// <inheritdoc cref="IDay6.SolvePart2"/>
     public override void SolvePart2()
     {
-
+        string dataStream = this.ReadLines()[0];
+        var potentialMarker = new Queue<char>(dataStream.Take(14));
+        int i = potentialMarker.Count;
+        for (; i < dataStream.Length - 1; ++i)
+        {
+            if (this.IsValidMarker(potentialMarker))
+            {
+                break;
+            }
+            potentialMarker.Dequeue();
+            potentialMarker.Enqueue(dataStream[i]);
+        }
+        Console.WriteLine($"First marker '{string.Concat(potentialMarker)}' ends at index {i}");
     }
 }
