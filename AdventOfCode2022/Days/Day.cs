@@ -33,11 +33,11 @@ abstract class Day : IDay
 
     protected uint DayNumber => uint.Parse(new ReadOnlySpan<char>(this.GetType().Name.LastOrDefault()));
 
-    protected string[] ReadLines()
+    protected string[] ReadLines(bool useExample = false)
     {
         string root = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         string day = this.GetType().Name;
-        string path = Path.Combine(root, @$"Days\{day}\{day}Input.txt");
+        string path = Path.Combine(root, @$"Days\{day}\{day}{(useExample ? "Example" : "")}Input.txt");
         return File.ReadAllLines(path);
     }
 }
