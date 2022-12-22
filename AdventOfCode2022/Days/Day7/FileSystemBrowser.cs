@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace AdventOfCode2022.Days.Day7
 {
@@ -11,6 +12,22 @@ namespace AdventOfCode2022.Days.Day7
             this.Root = root;
             this.CurrentDirectory = this.Root;
         }
+
+        internal Dictionary<string, int> GetDirectorySizes()
+        {
+            Dictionary<string, int> directorySizes = new();
+            void GetDirectorySizes(Directory directory)
+            {
+                directorySizes.Add(directory.FullPath, directory.GetSize());
+                foreach (Directory childDirectory in directory.Directories)
+                {
+                    GetDirectorySizes(childDirectory);
+                }
+            }
+            GetDirectorySizes(this.Root);
+            return directorySizes;
+        }
+
         internal void ExecuteCommand(string command)
         {
             if (command.StartsWith("cd"))
