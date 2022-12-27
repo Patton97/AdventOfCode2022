@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace AdventOfCode2022.Days;
 
-abstract class Day : IDay
+public abstract class Day : IDay
 {
     public void Solve()
     {
@@ -31,13 +31,12 @@ abstract class Day : IDay
         this.SolvePart2,
     };
 
-    protected uint DayNumber => uint.Parse(new ReadOnlySpan<char>(this.GetType().Name.LastOrDefault()));
+    protected virtual uint DayNumber => uint.Parse(new ReadOnlySpan<char>(this.GetType().Name.LastOrDefault()));
 
     protected string[] ReadLines(bool useExample = false)
     {
         string root = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-        string day = this.GetType().Name;
-        string path = Path.Combine(root, @$"Days\{day}\{day}{(useExample ? "Example" : "")}Input.txt");
+        string path = Path.Combine(root, @$"Days\Day{this.DayNumber}\Day{this.DayNumber}{(useExample ? "Example" : "")}Input.txt");
         return File.ReadAllLines(path);
     }
 }
