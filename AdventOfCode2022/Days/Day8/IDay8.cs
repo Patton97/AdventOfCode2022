@@ -1,11 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Data.Common;
-using System.Diagnostics;
-using System.Reflection;
-using System.Runtime.Intrinsics.X86;
-using System;
-
-namespace AdventOfCode2022.Days.Day8;
+﻿namespace AdventOfCode2022.Days.Day8;
 
 internal interface IDay8 : IDay
 {

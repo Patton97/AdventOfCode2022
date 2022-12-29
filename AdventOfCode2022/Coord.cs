@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using System;
-using System.Diagnostics;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Diagnostics;
 
-namespace AdventOfCode2022.Days.Day8;
+namespace AdventOfCode2022;
 
 [DebuggerDisplay("({X}, {Y})")]
 internal record Coord(int X, int Y)

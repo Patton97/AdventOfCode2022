@@ -1,6 +1,6 @@
 ﻿using AdventOfCode2022.Days.Day8;
 
-namespace AdventOfCode2022.Tests.Day8;
+namespace AdventOfCode2022.Tests.Days.Day8;
 
 [TestClass]
 public class TreeGridTests : DayTests
@@ -12,7 +12,7 @@ public class TreeGridTests : DayTests
     [TestMethod]
     public void CanCheckIfCoordIsOnEdgeOfGrid()
     {
-        var treeGrid = TreeGrid.Create(this.ReadLines(useExample: true));
+        var treeGrid = TreeGrid.Create(ReadLines(useExample: true));
         void CanCheckIfCoordIsOnEdgeOfGrid(CanCheckIfCoordIsOnEdgeOfGridTestCase testCase)
         {
             bool actualIsOnEdgeOfGrid = treeGrid.IsOnEdgeOfGrid(testCase.Coord);
@@ -53,7 +53,7 @@ public class TreeGridTests : DayTests
     [TestMethod]
     public void CanGetAllTreesFromEachEdgeTo()
     {
-        var treeGrid = TreeGrid.Create(this.ReadLines(useExample: true));
+        var treeGrid = TreeGrid.Create(ReadLines(useExample: true));
         void CanGetAllTreesFromEachEdgeTo(CanGetAllTreesFromEachEdgeToTestCase testCase)
         {
             Tree[][] actualTrees = treeGrid.GetAllTreesFromEachEdgeTo(testCase.ToCoord)
@@ -107,13 +107,13 @@ public class TreeGridTests : DayTests
         }
     }
     #endregion
-    
+
     #region CanGetAllTreesToEachEdgeFrom
     readonly record struct CanGetAllTreesToEachEdgeFromTestCase(string Description, Coord FromCoord, Tree[][] ExpectedTrees);
     [TestMethod]
     public void CanGetAllTreesToEachEdgeFrom()
     {
-        var treeGrid = TreeGrid.Create(this.ReadLines(useExample: true));
+        var treeGrid = TreeGrid.Create(ReadLines(useExample: true));
         void CanGetAllTreesToEachEdgeFrom(CanGetAllTreesToEachEdgeFromTestCase testCase)
         {
             Tree[][] actualTrees = treeGrid.GetAllTreesToEachEdgeFrom(testCase.FromCoord)
@@ -168,11 +168,12 @@ public class TreeGridTests : DayTests
     }
     #endregion
 
+    #region CanGetVisibilityScore
     readonly record struct CanGetVisibilityScoreTestCase(string Description, Tree FromTree, Tree[] TreesInOneDirection, int ExpectedVisibilityScore);
     [TestMethod]
     public void CanGetVisibilityScore()
     {
-        var treeGrid = TreeGrid.Create(this.ReadLines(useExample: true));
+        var treeGrid = TreeGrid.Create(ReadLines(useExample: true));
         void CanGetVisibilityScore(CanGetVisibilityScoreTestCase testCase)
         {
             int actualVisibilityScore = treeGrid.GetVisibilityScore(testCase.FromTree, testCase.TreesInOneDirection);
@@ -273,4 +274,5 @@ public class TreeGridTests : DayTests
             CanGetVisibilityScore(testCase);
         }
     }
+    #endregion
 }

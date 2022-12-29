@@ -1,6 +1,6 @@
-using AdventOfCode2022.Days.Day8;
+using AdventOfCode2022.Tests.Days.Day8;
 
-namespace AdventOfCode2022.Tests.Day8;
+namespace AdventOfCode2022.Tests;
 
 [TestClass]
 public class CoordTests : DayTests
