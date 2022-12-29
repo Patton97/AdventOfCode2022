@@ -6,29 +6,36 @@ namespace AdventOfCode2022.Days.Day9;
 
 internal class Day9 : Day, IDay9
 {
+    /// <inheritdoc cref="IDay9.SolvePart1"/>
     public override void SolvePart1()
     {
-        IEnumerable<Vector2Int> ropeMovements = this.ReadLines()
-            .Select(this.LineToRopeMovement);
-        var ropeSimulator = new RopeSimulator();
-        foreach (Vector2Int ropeMovement in ropeMovements)
+        this.RunSimulationForRopeOfLength(numRopeElements: 2);
+    }
+
+    /// <inheritdoc cref="IDay9.SolvePart2"/>
+    public override void SolvePart2()
+    {
+        this.RunSimulationForRopeOfLength(numRopeElements: 10);
+    }
+
+    void RunSimulationForRopeOfLength(uint numRopeElements)
+    {
+        IEnumerable<Vector2Int> ropeMovementVectors = this.ReadLines()
+            .Select(this.LineToRopeMovementVector);
+        var ropeSimulator = new RopeSimulator(numRopeElements);
+        foreach (Vector2Int ropeMovementVector in ropeMovementVectors)
         {
-            ropeSimulator.PerformMovement(ropeMovement);
+            ropeSimulator.MoveHead(ropeMovementVector);
         }
         Console.WriteLine($"Tail visited {ropeSimulator.Tail.AllLocations.Count} unique locations.");
     }
 
-    public override void SolvePart2()
-    {
-
-    }
-
-    Vector2Int LineToRopeMovement(string line)
+    Vector2Int LineToRopeMovementVector(string line)
     {
         char direction = line[0];
         int amount = int.Parse(string.Concat(line.Skip(2)));
 
-        switch(direction)
+        switch (direction)
         {
             case 'U':
                 return new Vector2Int(0, -amount);

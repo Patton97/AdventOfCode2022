@@ -1,76 +1,69 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace AdventOfCode2022.Days.Day9;
 
-internal readonly record struct RopeLocation(Vector2Int HeadLocation, Vector2Int TailLocation);
-
 internal class RopeSimulator
 {
-    internal RopeElement Head { get; } = new RopeElement();
-    internal RopeElement Tail { get; } = new RopeElement();
+    internal ReadOnlyCollection<RopeNode> Nodes { get; }
+    internal RopeNode Head => this.Nodes.First();
+    internal RopeNode Tail => this.Nodes.Last();
+
     internal ReadOnlyCollection<RopeLocation> AllLocations => new(this.allLocations);
     private List<RopeLocation> allLocations = new();
 
-    internal void PerformMovement(Vector2Int movementVector)
+    internal RopeSimulator(uint numElements)
+    {
+        if (numElements < 2)
+        {
+            throw new ArgumentException(
+                message: "Rope must have at least 2 elements (head + tail)",
+                paramName: nameof(numElements));
+        }
+
+        var nodes = new RopeNode[numElements];
+        for (int i = (int)numElements - 1; i >= 0; --i)
+        {
+            nodes[i] = new RopeNode()
+            {
+                Follower = nodes.ElementAtOrDefault(i + 1)
+            };
+        }
+        this.Nodes = new(nodes);
+    }
+
+    internal void MoveHead(Vector2Int movementVector)
     {
         int movementAmount = Math.Abs(movementVector.X + movementVector.Y);
-        for (int i = 0; i < movementAmount; ++i)
+        for (int movementIndex = 0; movementIndex < movementAmount; ++movementIndex)
         {
-            this.MoveHead(movementVector with
-            {
-                X = movementVector.X / movementAmount,
-                Y = movementVector.Y / movementAmount
-            });
-            this.allLocations.Add(new RopeLocation(this.Head.CurrentLocation, this.Tail.CurrentLocation));
+            this.Nodes.First().Move(new Vector2Int(
+                x: movementVector.X / movementAmount,
+                y: movementVector.Y / movementAmount
+            ));
+            ReadOnlyCollection<Vector2Int> nodeLocations = this.Nodes
+                .Select(node => node.CurrentLocation)
+                .ToArray()
+                .AsReadOnly();
+            var ropeLocation = new RopeLocation(nodeLocations);
+            this.allLocations.Add(ropeLocation);
         }
     }
 
-    private void MoveHead(Vector2Int movementVector)
+    internal string GetDebugString()
     {
-        this.Head.Move(movementVector);
-        if (movementVector.X < 0)
-        {
-            ++movementVector.X;
-        }
-        if (movementVector.X > 0)
-        {
-            --movementVector.X;
-        }
-        if (movementVector.Y < 0)
-        {
-            ++movementVector.Y;
-        }
-        if (movementVector.Y > 0)
-        {
-            --movementVector.Y;
-        }
-        this.UpdateTail();
+        return string.Join("\n", this.AllLocations.Select(this.RopeLocationToDebugString));
     }
 
-    private void UpdateTail()
+    string RopeLocationToDebugString(RopeLocation ropeLocation)
     {
-        if (this.AreHeadAndTailAdjacent())
-        {
-            return;
-        }
-
-        this.Tail.SetLocation(this.Head.PreviousLocation);
-    }
-
-    bool AreHeadAndTailAdjacent()
-    {
-        int deltaX = this.Head.CurrentLocation.X - this.Tail.CurrentLocation.X;
-        int deltaY = this.Head.CurrentLocation.Y - this.Tail.CurrentLocation.Y;
-
-        bool areHeadAndTailOverlapping = deltaX == 0 && deltaY == 0;
-        if (areHeadAndTailOverlapping)
-        {
-            return true;
-        }
-        return -1 <= deltaX && deltaX <= 1
-            && -1 <= deltaY && deltaY <= 1;
+        return string.Join(
+            " | ",
+            ropeLocation.NodeLocations
+                .Select(location => $"({location.X}, {location.Y})")
+        );
     }
 }
 
