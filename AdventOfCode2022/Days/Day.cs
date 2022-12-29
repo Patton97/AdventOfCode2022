@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -31,7 +32,17 @@ public abstract class Day : IDay
         this.SolvePart2,
     };
 
-    protected virtual uint DayNumber => uint.Parse(new ReadOnlySpan<char>(this.GetType().Name.LastOrDefault()));
+    protected virtual uint DayNumber
+    {
+        get
+        {
+            IEnumerable<char> numericChars = this.GetType().Name
+                .Reverse()
+                .Where(c => int.TryParse(new ReadOnlySpan<char>(c), out _))
+                .Reverse();
+            return uint.Parse(string.Concat(numericChars));
+        }
+    }
 
     protected string[] ReadLines(bool useExample = false)
     {

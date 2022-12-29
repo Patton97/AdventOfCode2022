@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace AdventOfCode2022;
@@ -19,6 +20,18 @@ internal static class Utils
     internal static int Product(this IEnumerable<int> ints)
     {
         return ints.Aggregate(1, (x, y) => x * y);
+    }
+
+    internal static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(
+        this IEnumerable<KeyValuePair<TKey, TValue>> kvps)
+    {
+        return kvps.ToDictionary(kvp => kvp.Key, kvp => kvp.Value);
+    }
+
+    internal static ReadOnlyDictionary<TKey, TValue> ToReadOnlyDictionary<TKey, TValue>(
+        this IEnumerable<KeyValuePair<TKey, TValue>> kvps)
+    {
+        return new ReadOnlyDictionary<TKey, TValue>(kvps.ToDictionary());
     }
 
     internal static IEnumerable<int> GetAllIntsBetween(int fromInt, int toInt)
