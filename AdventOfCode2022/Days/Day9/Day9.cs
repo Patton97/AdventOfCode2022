@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AdventOfCode2022.Days.Day9;
 
-internal class Day9 : Day, IDay9
+internal class Day9 : Day
 {
     /// <inheritdoc cref="IDay9.SolvePart1"/>
     public override void SolvePart1()

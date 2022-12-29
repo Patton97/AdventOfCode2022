@@ -1,23 +1,22 @@
 ﻿using System.Diagnostics;
 
-namespace AdventOfCode2022.Days.Day7
+namespace AdventOfCode2022.Days.Day7;
+
+[DebuggerDisplay("{FullPath}")]
+internal abstract class FileSystemEntry
 {
-    [DebuggerDisplay("{FullPath}")]
-    internal abstract class FileSystemEntry
+    internal required string Name { get; init; }
+    internal required Directory Parent { get; init; }
+    internal abstract int GetSize();
+    internal string FullPath
     {
-        internal required string Name { get; init; }
-        internal required Directory Parent { get; init; }
-        internal abstract int GetSize();
-        internal string FullPath
+        get
         {
-            get
+            if (this.Parent == null)
             {
-                if (this.Parent == null)
-                {
-                    return this.Name;
-                }
-                return this.Parent.FullPath + "/" + this.Name;
+                return this.Name;
             }
+            return this.Parent.FullPath + "/" + this.Name;
         }
     }
 }

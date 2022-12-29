@@ -1,6 +1,6 @@
 ﻿using AdventOfCode2022.Days;
 
-namespace AdventOfCode2022.Tests.Days.Day8;
+namespace AdventOfCode2022.Tests.Days;
 
 public abstract class DayTests : Day
 {

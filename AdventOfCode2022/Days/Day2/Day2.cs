@@ -2,7 +2,7 @@
 
 namespace AdventOfCode2022.Days.Day2;
 
-class Day2 : Day, IDay2
+class Day2 : Day
 {
     /// <inheritdoc cref="IDay2.SolvePart1"/>
     public override void SolvePart1() => this.SolvePart(new Day2GameLogicPart1());

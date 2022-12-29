@@ -6,7 +6,7 @@ using AdventOfCode2022.Days.Day5.Parsers;
 
 namespace AdventOfCode2022.Days.Day5;
 
-internal class Day5 : Day, IDay5
+internal class Day5 : Day
 {
     /// <inheritdoc cref="IDay5.SolvePart1"/>
     public override void SolvePart1()

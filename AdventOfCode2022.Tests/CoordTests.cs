@@ -1,12 +1,8 @@
-using AdventOfCode2022.Tests.Days.Day8;
-
 namespace AdventOfCode2022.Tests;
 
 [TestClass]
-public class Vector2IntTests : DayTests
+public class Vector2IntTests
 {
-    protected override uint DayNumber => 8;
-
     #region CanGetAllVectorsBetween
     readonly record struct CanGetAllVectorsBetweenTestCase(string Description, Vector2Int FromVector, Vector2Int ToVector, Vector2Int[] ExpectedVectorsBetween);
 
@@ -79,5 +75,4 @@ public class Vector2IntTests : DayTests
         }
     }
     #endregion
-
 }

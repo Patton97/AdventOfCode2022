@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AdventOfCode2022.Days.Day7
 {
-    internal class Day7 : Day, IDay7
+    internal class Day7 : Day
     {
         public override void SolvePart1()
         {

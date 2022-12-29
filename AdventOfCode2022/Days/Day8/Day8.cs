@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace AdventOfCode2022.Days.Day8;
 
-internal class Day8 : Day, IDay8
+internal class Day8 : Day
 {
     public override void SolvePart1()
     {

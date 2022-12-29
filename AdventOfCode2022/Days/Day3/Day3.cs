@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace AdventOfCode2022.Days.Day3;
 
-internal class Day3 : Day, IDay3
+internal class Day3 : Day
 {
     char[] priority { get; } = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
 
