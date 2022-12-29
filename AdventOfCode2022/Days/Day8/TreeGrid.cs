@@ -12,7 +12,7 @@ internal record TreeGrid(ReadOnlyCollection<ReadOnlyCollection<Tree>> Rows)
     {
         Tree CharToTree(char @char, int charIndex, int lineIndex)
         {
-            return new Tree(int.Parse(new ReadOnlySpan<char>(@char)), new Coord(charIndex, lineIndex));
+            return new Tree(int.Parse(new ReadOnlySpan<char>(@char)), new Vector2Int(charIndex, lineIndex));
         }
 
         ReadOnlyCollection<Tree> LineToTreeCollection(string line, int lineIndex)
@@ -31,7 +31,7 @@ internal record TreeGrid(ReadOnlyCollection<ReadOnlyCollection<Tree>> Rows)
         );
     }
 
-    internal bool IsOnEdgeOfGrid(Coord coord)
+    internal bool IsOnEdgeOfGrid(Vector2Int coord)
     {
         return coord.X == 0
             || coord.X == this.Rows[0].Count - 1
@@ -115,39 +115,39 @@ internal record TreeGrid(ReadOnlyCollection<ReadOnlyCollection<Tree>> Rows)
             .Any(treesInOneDirection => treesInOneDirection.All(tree.IsTreeVisibleWhenBehind));
     }
 
-    internal IEnumerable<IEnumerable<Tree>> GetAllTreesFromEachEdgeTo(Coord toCoord)
+    internal IEnumerable<IEnumerable<Tree>> GetAllTreesFromEachEdgeTo(Vector2Int toCoord)
     {
-        Coord topEdgeCoord = new Coord(toCoord.X, -1);
-        Coord bottomEdgeCoord = new Coord(toCoord.X, this.Rows.Count);
-        Coord leftEdgeCoord = new Coord(-1, toCoord.Y);
-        Coord rightEdgeCoord = new Coord(this.Rows[0].Count, toCoord.Y);
-        return Enumerable.Empty<IEnumerable<Coord>>()
-            .Append(Coord.GetAllCoordsBetween(topEdgeCoord, toCoord))
-            .Append(Coord.GetAllCoordsBetween(rightEdgeCoord, toCoord))
-            .Append(Coord.GetAllCoordsBetween(bottomEdgeCoord, toCoord))
-            .Append(Coord.GetAllCoordsBetween(leftEdgeCoord, toCoord))
+        Vector2Int topEdgeCoord = new Vector2Int(toCoord.X, -1);
+        Vector2Int bottomEdgeCoord = new Vector2Int(toCoord.X, this.Rows.Count);
+        Vector2Int leftEdgeCoord = new Vector2Int(-1, toCoord.Y);
+        Vector2Int rightEdgeCoord = new Vector2Int(this.Rows[0].Count, toCoord.Y);
+        return Enumerable.Empty<IEnumerable<Vector2Int>>()
+            .Append(Vector2Int.GetAllVectorsBetween(topEdgeCoord, toCoord))
+            .Append(Vector2Int.GetAllVectorsBetween(rightEdgeCoord, toCoord))
+            .Append(Vector2Int.GetAllVectorsBetween(bottomEdgeCoord, toCoord))
+            .Append(Vector2Int.GetAllVectorsBetween(leftEdgeCoord, toCoord))
             .Select(this.CoordsToTrees);
     }
 
-    internal IEnumerable<IEnumerable<Tree>> GetAllTreesToEachEdgeFrom(Coord fromCoord)
+    internal IEnumerable<IEnumerable<Tree>> GetAllTreesToEachEdgeFrom(Vector2Int fromCoord)
     {
-        Coord topEdgeCoord = new Coord(fromCoord.X, -1);
-        Coord bottomEdgeCoord = new Coord(fromCoord.X, this.Rows.Count);
-        Coord leftEdgeCoord = new Coord(-1, fromCoord.Y);
-        Coord rightEdgeCoord = new Coord(this.Rows[0].Count, fromCoord.Y);
-        return Enumerable.Empty<IEnumerable<Coord>>()
-            .Append(Coord.GetAllCoordsBetween(fromCoord, topEdgeCoord))
-            .Append(Coord.GetAllCoordsBetween(fromCoord, rightEdgeCoord))
-            .Append(Coord.GetAllCoordsBetween(fromCoord, bottomEdgeCoord))
-            .Append(Coord.GetAllCoordsBetween(fromCoord, leftEdgeCoord))
+        Vector2Int topEdgeCoord = new Vector2Int(fromCoord.X, -1);
+        Vector2Int bottomEdgeCoord = new Vector2Int(fromCoord.X, this.Rows.Count);
+        Vector2Int leftEdgeCoord = new Vector2Int(-1, fromCoord.Y);
+        Vector2Int rightEdgeCoord = new Vector2Int(this.Rows[0].Count, fromCoord.Y);
+        return Enumerable.Empty<IEnumerable<Vector2Int>>()
+            .Append(Vector2Int.GetAllVectorsBetween(fromCoord, topEdgeCoord))
+            .Append(Vector2Int.GetAllVectorsBetween(fromCoord, rightEdgeCoord))
+            .Append(Vector2Int.GetAllVectorsBetween(fromCoord, bottomEdgeCoord))
+            .Append(Vector2Int.GetAllVectorsBetween(fromCoord, leftEdgeCoord))
             .Select(this.CoordsToTrees);
     }
 
-    Tree CoordToTree(Coord coord)
+    Tree CoordToTree(Vector2Int coord)
     {
         return this.Rows[coord.Y][coord.X];
     }
-    IEnumerable<Tree> CoordsToTrees(IEnumerable<Coord> coords)
+    IEnumerable<Tree> CoordsToTrees(IEnumerable<Vector2Int> coords)
     {
         return coords.Select(this.CoordToTree);
     }

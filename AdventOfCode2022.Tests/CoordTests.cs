@@ -3,79 +3,79 @@ using AdventOfCode2022.Tests.Days.Day8;
 namespace AdventOfCode2022.Tests;
 
 [TestClass]
-public class CoordTests : DayTests
+public class Vector2IntTests : DayTests
 {
     protected override uint DayNumber => 8;
 
-    #region CanGetAllCoordsBetween
-    readonly record struct CanGetAllCoordsBetweenTestCase(string Description, Coord FromCoord, Coord ToCoord, Coord[] ExpectedCoordsBetween);
+    #region CanGetAllVectorsBetween
+    readonly record struct CanGetAllVectorsBetweenTestCase(string Description, Vector2Int FromVector, Vector2Int ToVector, Vector2Int[] ExpectedVectorsBetween);
 
     [TestMethod]
-    public void CanGetAllCoordsBetween()
+    public void CanGetAllVectorsBetween()
     {
-        void CanGetAllCoordsBetween(CanGetAllCoordsBetweenTestCase testCase)
+        void CanGetAllVectorsBetween(CanGetAllVectorsBetweenTestCase testCase)
         {
-            IEnumerable<Coord> actualCoordsBetween = Coord.GetAllCoordsBetween(testCase.FromCoord, testCase.ToCoord);
-            bool condition = testCase.ExpectedCoordsBetween.SequenceEqual(actualCoordsBetween);
+            IEnumerable<Vector2Int> actualVectorsBetween = Vector2Int.GetAllVectorsBetween(testCase.FromVector, testCase.ToVector);
+            bool condition = testCase.ExpectedVectorsBetween.SequenceEqual(actualVectorsBetween);
             string description = $"Test case '{testCase.Description}' failed.";
             Assert.IsTrue(condition, description);
         }
 
-        var testCases = new CanGetAllCoordsBetweenTestCase[]
+        var testCases = new CanGetAllVectorsBetweenTestCase[]
         {
-            new CanGetAllCoordsBetweenTestCase(
+            new CanGetAllVectorsBetweenTestCase(
                 "Vertical",
-                new Coord(0,0),
-                new Coord(0,5),
-                new Coord[]
+                new Vector2Int(0,0),
+                new Vector2Int(0,5),
+                new Vector2Int[]
                 {
-                    new Coord(0,1),
-                    new Coord(0,2),
-                    new Coord(0,3),
-                    new Coord(0,4),
+                    new Vector2Int(0,1),
+                    new Vector2Int(0,2),
+                    new Vector2Int(0,3),
+                    new Vector2Int(0,4),
                 }
             ),
-            new CanGetAllCoordsBetweenTestCase(
+            new CanGetAllVectorsBetweenTestCase(
                 "Vertical Reversed",
-                new Coord(0,5),
-                new Coord(0,0),
-                new Coord[]
+                new Vector2Int(0,5),
+                new Vector2Int(0,0),
+                new Vector2Int[]
                 {
-                    new Coord(0,4),
-                    new Coord(0,3),
-                    new Coord(0,2),
-                    new Coord(0,1),
+                    new Vector2Int(0,4),
+                    new Vector2Int(0,3),
+                    new Vector2Int(0,2),
+                    new Vector2Int(0,1),
                 }
             ),
-            new CanGetAllCoordsBetweenTestCase(
+            new CanGetAllVectorsBetweenTestCase(
                 "Horizontal",
-                new Coord(0,0),
-                new Coord(5,0),
-                new Coord[]
+                new Vector2Int(0,0),
+                new Vector2Int(5,0),
+                new Vector2Int[]
                 {
-                    new Coord(1,0),
-                    new Coord(2,0),
-                    new Coord(3,0),
-                    new Coord(4,0),
+                    new Vector2Int(1,0),
+                    new Vector2Int(2,0),
+                    new Vector2Int(3,0),
+                    new Vector2Int(4,0),
                 }
             ),
-            new CanGetAllCoordsBetweenTestCase(
+            new CanGetAllVectorsBetweenTestCase(
                 "Horizontal Reversed",
-                new Coord(5,0),
-                new Coord(0,0),
-                new Coord[]
+                new Vector2Int(5,0),
+                new Vector2Int(0,0),
+                new Vector2Int[]
                 {
-                    new Coord(4,0),
-                    new Coord(3,0),
-                    new Coord(2,0),
-                    new Coord(1,0),
+                    new Vector2Int(4,0),
+                    new Vector2Int(3,0),
+                    new Vector2Int(2,0),
+                    new Vector2Int(1,0),
                 }
             ),
         };
 
-        foreach (CanGetAllCoordsBetweenTestCase testCase in testCases)
+        foreach (CanGetAllVectorsBetweenTestCase testCase in testCases)
         {
-            CanGetAllCoordsBetween(testCase);
+            CanGetAllVectorsBetween(testCase);
         }
     }
     #endregion

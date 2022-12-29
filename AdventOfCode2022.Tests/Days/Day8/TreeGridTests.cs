@@ -8,7 +8,7 @@ public class TreeGridTests : DayTests
     protected override uint DayNumber => 8;
 
     #region CanCheckIfCoordIsOnEdgeOfGrid
-    readonly record struct CanCheckIfCoordIsOnEdgeOfGridTestCase(string Description, Coord Coord, bool ExpectedIsOnEdgeOfGrid);
+    readonly record struct CanCheckIfCoordIsOnEdgeOfGridTestCase(string Description, Vector2Int Coord, bool ExpectedIsOnEdgeOfGrid);
     [TestMethod]
     public void CanCheckIfCoordIsOnEdgeOfGrid()
     {
@@ -22,24 +22,24 @@ public class TreeGridTests : DayTests
         var testCases = new CanCheckIfCoordIsOnEdgeOfGridTestCase[]
         {
             // should pass
-            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Top-left corner", new Coord(0,0), ExpectedIsOnEdgeOfGrid: true),
-            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Top-right corner", new Coord(4,0), ExpectedIsOnEdgeOfGrid: true),
-            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Bottom-left corner", new Coord(0,4), ExpectedIsOnEdgeOfGrid: true),
-            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Bottom-right corner", new Coord(4,4), ExpectedIsOnEdgeOfGrid: true),
-            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Top-middle", new Coord(2,0), ExpectedIsOnEdgeOfGrid: true),
-            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Bottom-middle", new Coord(2,4), ExpectedIsOnEdgeOfGrid: true),
-            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Left-middle", new Coord(0,2), ExpectedIsOnEdgeOfGrid: true),
-            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Right-middle", new Coord(4,2), ExpectedIsOnEdgeOfGrid: true),
+            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Top-left corner", new Vector2Int(0,0), ExpectedIsOnEdgeOfGrid: true),
+            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Top-right corner", new Vector2Int(4,0), ExpectedIsOnEdgeOfGrid: true),
+            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Bottom-left corner", new Vector2Int(0,4), ExpectedIsOnEdgeOfGrid: true),
+            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Bottom-right corner", new Vector2Int(4,4), ExpectedIsOnEdgeOfGrid: true),
+            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Top-middle", new Vector2Int(2,0), ExpectedIsOnEdgeOfGrid: true),
+            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Bottom-middle", new Vector2Int(2,4), ExpectedIsOnEdgeOfGrid: true),
+            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Left-middle", new Vector2Int(0,2), ExpectedIsOnEdgeOfGrid: true),
+            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Right-middle", new Vector2Int(4,2), ExpectedIsOnEdgeOfGrid: true),
             // should fail
-            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Top-left corner inner", new Coord(1,1), ExpectedIsOnEdgeOfGrid: false),
-            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Top-right corner inner", new Coord(3,1), ExpectedIsOnEdgeOfGrid: false),
-            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Bottom-left corner inner", new Coord(1,3), ExpectedIsOnEdgeOfGrid: false),
-            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Bottom-right corner inner", new Coord(3,3), ExpectedIsOnEdgeOfGrid: false),
-            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Top-middle inner", new Coord(2,1), ExpectedIsOnEdgeOfGrid: false),
-            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Bottom-middle inner", new Coord(2,3), ExpectedIsOnEdgeOfGrid: false),
-            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Left-middle inner", new Coord(1,2), ExpectedIsOnEdgeOfGrid: false),
-            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Right-middle inner", new Coord(3,2), ExpectedIsOnEdgeOfGrid: false),
-            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Middle", new Coord(2,2), ExpectedIsOnEdgeOfGrid: false),
+            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Top-left corner inner", new Vector2Int(1,1), ExpectedIsOnEdgeOfGrid: false),
+            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Top-right corner inner", new Vector2Int(3,1), ExpectedIsOnEdgeOfGrid: false),
+            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Bottom-left corner inner", new Vector2Int(1,3), ExpectedIsOnEdgeOfGrid: false),
+            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Bottom-right corner inner", new Vector2Int(3,3), ExpectedIsOnEdgeOfGrid: false),
+            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Top-middle inner", new Vector2Int(2,1), ExpectedIsOnEdgeOfGrid: false),
+            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Bottom-middle inner", new Vector2Int(2,3), ExpectedIsOnEdgeOfGrid: false),
+            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Left-middle inner", new Vector2Int(1,2), ExpectedIsOnEdgeOfGrid: false),
+            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Right-middle inner", new Vector2Int(3,2), ExpectedIsOnEdgeOfGrid: false),
+            new CanCheckIfCoordIsOnEdgeOfGridTestCase("Middle", new Vector2Int(2,2), ExpectedIsOnEdgeOfGrid: false),
         };
         foreach (CanCheckIfCoordIsOnEdgeOfGridTestCase testCase in testCases)
         {
@@ -49,7 +49,7 @@ public class TreeGridTests : DayTests
     #endregion
 
     #region CanGetAllTreesFromEachEdgeTo
-    readonly record struct CanGetAllTreesFromEachEdgeToTestCase(string Description, Coord ToCoord, Tree[][] ExpectedTrees);
+    readonly record struct CanGetAllTreesFromEachEdgeToTestCase(string Description, Vector2Int ToCoord, Tree[][] ExpectedTrees);
     [TestMethod]
     public void CanGetAllTreesFromEachEdgeTo()
     {
@@ -71,32 +71,32 @@ public class TreeGridTests : DayTests
         {
             new CanGetAllTreesFromEachEdgeToTestCase(
                 "To centre",
-                new Coord(2,2),
+                new Vector2Int(2,2),
                 new Tree[][]
                 {
                     // from top
                     new Tree[]
                     {
-                        new Tree(Height:3, new Coord(2, 0)),
-                        new Tree(Height:5, new Coord(2, 1)),
+                        new Tree(Height:3, new Vector2Int(2, 0)),
+                        new Tree(Height:5, new Vector2Int(2, 1)),
                     },
                     // from right
                     new Tree[]
                     {
-                        new Tree(Height:2, new Coord(4, 2)),
-                        new Tree(Height:3, new Coord(3, 2)),
+                        new Tree(Height:2, new Vector2Int(4, 2)),
+                        new Tree(Height:3, new Vector2Int(3, 2)),
                     },
                     // from bottom
                     new Tree[]
                     {
-                        new Tree(Height:3, new Coord(2, 4)),
-                        new Tree(Height:5, new Coord(2, 3)),
+                        new Tree(Height:3, new Vector2Int(2, 4)),
+                        new Tree(Height:5, new Vector2Int(2, 3)),
                     },
                     // from left
                     new Tree[]
                     {
-                        new Tree(Height:6, new Coord(0, 2)),
-                        new Tree(Height:5, new Coord(1, 2)),
+                        new Tree(Height:6, new Vector2Int(0, 2)),
+                        new Tree(Height:5, new Vector2Int(1, 2)),
                     },
                 }
             ),
@@ -109,7 +109,7 @@ public class TreeGridTests : DayTests
     #endregion
 
     #region CanGetAllTreesToEachEdgeFrom
-    readonly record struct CanGetAllTreesToEachEdgeFromTestCase(string Description, Coord FromCoord, Tree[][] ExpectedTrees);
+    readonly record struct CanGetAllTreesToEachEdgeFromTestCase(string Description, Vector2Int FromCoord, Tree[][] ExpectedTrees);
     [TestMethod]
     public void CanGetAllTreesToEachEdgeFrom()
     {
@@ -131,32 +131,32 @@ public class TreeGridTests : DayTests
         {
             new CanGetAllTreesToEachEdgeFromTestCase(
                 "To centre",
-                new Coord(2,2),
+                new Vector2Int(2,2),
                 new Tree[][]
                 {
                     // to top
                     new Tree[]
                     {
-                        new Tree(Height:5, new Coord(2, 1)),
-                        new Tree(Height:3, new Coord(2, 0)),
+                        new Tree(Height:5, new Vector2Int(2, 1)),
+                        new Tree(Height:3, new Vector2Int(2, 0)),
                     },
                     // to right
                     new Tree[]
                     {
-                        new Tree(Height:3, new Coord(3, 2)),
-                        new Tree(Height:2, new Coord(4, 2)),
+                        new Tree(Height:3, new Vector2Int(3, 2)),
+                        new Tree(Height:2, new Vector2Int(4, 2)),
                     },
                     // to bottom
                     new Tree[]
                     {
-                        new Tree(Height:5, new Coord(2, 3)),
-                        new Tree(Height:3, new Coord(2, 4)),
+                        new Tree(Height:5, new Vector2Int(2, 3)),
+                        new Tree(Height:3, new Vector2Int(2, 4)),
                     },
                     // to left
                     new Tree[]
                     {
-                        new Tree(Height:5, new Coord(1, 2)),
-                        new Tree(Height:6, new Coord(0, 2)),
+                        new Tree(Height:5, new Vector2Int(1, 2)),
+                        new Tree(Height:6, new Vector2Int(0, 2)),
                     },
                 }
             ),
@@ -179,8 +179,8 @@ public class TreeGridTests : DayTests
             int actualVisibilityScore = treeGrid.GetVisibilityScore(testCase.FromTree, testCase.TreesInOneDirection);
             Assert.AreEqual(testCase.ExpectedVisibilityScore, actualVisibilityScore, testCase.Description);
         }
-        var firstExampleFromTree = new Tree(Height: 5, new Coord(2, 1));
-        var secondExampleFromTree = new Tree(Height: 5, new Coord(2, 3));
+        var firstExampleFromTree = new Tree(Height: 5, new Vector2Int(2, 1));
+        var secondExampleFromTree = new Tree(Height: 5, new Vector2Int(2, 3));
         var testCases = new CanGetVisibilityScoreTestCase[]
         {
             #region 1st Example
@@ -189,7 +189,7 @@ public class TreeGridTests : DayTests
                 firstExampleFromTree,
                 new Tree[]
                 {
-                    new Tree(Height:3, new Coord(2, 0)),
+                    new Tree(Height:3, new Vector2Int(2, 0)),
                 },
                 ExpectedVisibilityScore:1
             ),
@@ -198,8 +198,8 @@ public class TreeGridTests : DayTests
                 firstExampleFromTree,
                 new Tree[]
                 {
-                    new Tree(Height:1, new Coord(1, 2)),
-                    new Tree(Height:2, new Coord(0, 2)),
+                    new Tree(Height:1, new Vector2Int(1, 2)),
+                    new Tree(Height:2, new Vector2Int(0, 2)),
                 },
                 ExpectedVisibilityScore:2
             ),
@@ -208,9 +208,9 @@ public class TreeGridTests : DayTests
                 firstExampleFromTree,
                 new Tree[]
                 {
-                    new Tree(Height:3, new Coord(2, 2)),
-                    new Tree(Height:5, new Coord(2, 1)),
-                    new Tree(Height:3, new Coord(2, 0)),
+                    new Tree(Height:3, new Vector2Int(2, 2)),
+                    new Tree(Height:5, new Vector2Int(2, 1)),
+                    new Tree(Height:3, new Vector2Int(2, 0)),
                 },
                 ExpectedVisibilityScore:2
             ),
@@ -219,8 +219,8 @@ public class TreeGridTests : DayTests
                 firstExampleFromTree,
                 new Tree[]
                 {
-                    new Tree(Height:5, new Coord(1, 2)),
-                    new Tree(Height:2, new Coord(0, 2)),
+                    new Tree(Height:5, new Vector2Int(1, 2)),
+                    new Tree(Height:2, new Vector2Int(0, 2)),
                 },
                 ExpectedVisibilityScore:1
             ),
@@ -232,9 +232,9 @@ public class TreeGridTests : DayTests
                 secondExampleFromTree,
                 new Tree[]
                 {
-                    new Tree(Height:3, new Coord(2, 2)),
-                    new Tree(Height:5, new Coord(2, 1)),
-                    new Tree(Height:3, new Coord(2, 0)),
+                    new Tree(Height:3, new Vector2Int(2, 2)),
+                    new Tree(Height:5, new Vector2Int(2, 1)),
+                    new Tree(Height:3, new Vector2Int(2, 0)),
                 },
                 ExpectedVisibilityScore:2
             ),
@@ -243,8 +243,8 @@ public class TreeGridTests : DayTests
                 secondExampleFromTree,
                 new Tree[]
                 {
-                    new Tree(Height:4, new Coord(3, 3)),
-                    new Tree(Height:9, new Coord(4, 3)),
+                    new Tree(Height:4, new Vector2Int(3, 3)),
+                    new Tree(Height:9, new Vector2Int(4, 3)),
                 },
                 ExpectedVisibilityScore:2
             ),
@@ -253,7 +253,7 @@ public class TreeGridTests : DayTests
                 secondExampleFromTree,
                 new Tree[]
                 {
-                    new Tree(Height:3, new Coord(2, 4)),
+                    new Tree(Height:3, new Vector2Int(2, 4)),
                 },
                 ExpectedVisibilityScore:1
             ),
@@ -262,8 +262,8 @@ public class TreeGridTests : DayTests
                 secondExampleFromTree,
                 new Tree[]
                 {
-                    new Tree(Height:3, new Coord(1, 3)),
-                    new Tree(Height:3, new Coord(0, 3)),
+                    new Tree(Height:3, new Vector2Int(1, 3)),
+                    new Tree(Height:3, new Vector2Int(0, 3)),
                 },
                 ExpectedVisibilityScore:2
             ),
