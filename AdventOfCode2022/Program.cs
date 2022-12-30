@@ -1,1 +1,1 @@
-﻿new AdventOfCode2022.Days.Day10.Day10().Solve();
+﻿new AdventOfCode2022.Days.Day11.Day11().Solve();
