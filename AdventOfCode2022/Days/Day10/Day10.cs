@@ -20,13 +20,37 @@ internal class Day10 : Day
             Register xRegister = sender.Registers['X'];
             signalStrengths.Add((int)sender.CycleCounter * xRegister.Value);
         }
+        CPU cpu = this.CreateCPU();
+        cpu.CycleCompleted += Cpu_CycleCompleted;
+
+        this.ExecuteInstructions(cpu);
+
+        Console.WriteLine($"Sum of desired signal strengths: {signalStrengths.Sum()}");
+    }
+
+    public override void SolvePart2()
+    {
+        CPU cpu = this.CreateCPU();
+        var crtScreen = new CRTScreen
+        {
+            CPU = cpu,
+        };
+        this.ExecuteInstructions(cpu);
+
+        crtScreen.PrintGrid(Console.Write);
+    }
+
+    CPU CreateCPU()
+    {
         var registers = new Register[]
         {
             new Register { ID = 'X', Value = 1, },
         };
-        var cpu = new CPU(registers);
-        cpu.CycleCompleted += Cpu_CycleCompleted;
+        return new CPU(registers);
+    }
 
+    void ExecuteInstructions(CPU cpu)
+    {
         var parser = new RawInstructionParser();
         Instruction[] instructions = this.ReadLines()
             .Select(RawInstruction.Parse)
@@ -34,12 +58,5 @@ internal class Day10 : Day
             .ToArray();
         cpu.LoadInstructions(instructions);
         cpu.ExecuteInstructions();
-
-        Console.WriteLine($"Sum of desired signal strengths: {signalStrengths.Sum()}");
-    }
-
-    public override void SolvePart2()
-    {
-
     }
 }
