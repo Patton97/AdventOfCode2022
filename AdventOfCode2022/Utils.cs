@@ -22,6 +22,11 @@ internal static class Utils
         return ints.Aggregate(1, (x, y) => x * y);
     }
 
+    internal static ulong Product(this IEnumerable<ulong> ints)
+    {
+        return ints.Aggregate((ulong)1, (x, y) => x * y);
+    }
+
     internal static Dictionary<TKey, TValue> ToDictionary<TKey, TValue>(
         this IEnumerable<KeyValuePair<TKey, TValue>> kvps)
     {

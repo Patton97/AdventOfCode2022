@@ -2,8 +2,8 @@
 
 internal class Item
 {
-    internal long WorryLevel { get; set; }
-    internal Item(long worryLevel)
+    internal ulong WorryLevel { get; set; }
+    internal Item(ulong worryLevel)
     {
         this.WorryLevel = worryLevel;
     }

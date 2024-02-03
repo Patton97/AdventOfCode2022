@@ -4,13 +4,10 @@ using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
 
-namespace AdventOfCode2022.Days.Day11;
-
-internal delegate long MonkeyOperation(long oldWorryLevel, Action<string> printDebugInfo);
-internal delegate int MonkeyTest(long worryLevel, Action<string> printDebugInfo);
+namespace AdventOfCode2022.Days.Day11.Monkeys;
 
 [DebuggerDisplay("{ItemsInspected}")]
-internal class Monkey
+internal abstract class Monkey
 {
     internal required int ID { get; init; }
     internal required MonkeyOperation Operation { get; init; }
@@ -34,12 +31,11 @@ internal class Monkey
     internal void TakeTurn(ReadOnlyDictionary<int, Monkey> monkeys)
     {
         this.PrintDebugInfo?.Invoke($"Monkey {this.ID}:");
-        for (int i = 0; i < this.Items.Count; )
+        for (int i = 0; i < this.Items.Count;)
         {
             Item item = this.Items[i];
             this.Inspect(item);
-            item.WorryLevel /= 3;
-            this.PrintDebugInfo?.Invoke($"    Monkey gets bored with item. Worry level is divided by 3 to {item.WorryLevel}.");
+            this.GetBored(item);
             this.PassItem(item, monkeys);
             ++this.ItemsInspected;
         }
@@ -48,12 +44,14 @@ internal class Monkey
     void Inspect(Item item)
     {
         this.PrintDebugInfo?.Invoke($"  Monkey inspects an item with a worry level of {item.WorryLevel}.");
-        item.WorryLevel = this.Operation.Invoke(item.WorryLevel, this.PrintDebugInfo);
+        this.Operation.Perform(item);
     }
+
+    protected abstract void GetBored(Item item);
 
     void PassItem(Item item, ReadOnlyDictionary<int, Monkey> monkeys)
     {
-        int toMonkeyID = this.Test.Invoke(item.WorryLevel, this.PrintDebugInfo);
+        int toMonkeyID = this.Test.GetNextMonkeyID(item, this.PrintDebugInfo);
         this.items.Remove(item);
         monkeys[toMonkeyID].ReceiveItem(item);
     }

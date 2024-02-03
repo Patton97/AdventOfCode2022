@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using AdventOfCode2022;
 
-namespace AdventOfCode2022.Days.Day11;
+namespace AdventOfCode2022.Days.Day11.Monkeys;
 
 internal class MonkeyManager
 {
@@ -22,10 +23,10 @@ internal class MonkeyManager
         }
     }
 
-    internal int GetMonkeyBusiness()
+    internal ulong GetMonkeyBusiness()
     {
         return this.Monkeys
-            .Select(monkey => monkey.Value.ItemsInspected)
+            .Select(monkey => (ulong)monkey.Value.ItemsInspected)
             .OrderByDescending(x => x)
             .Take(2)
             .Product();
